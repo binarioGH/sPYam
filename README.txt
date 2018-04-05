@@ -5,3 +5,5 @@ theharvester: https://github.com/laramies/theHarvester
 este proyecto se llama "sPYam" porque es una concatenación de "spam" y "py" de python.
 es un proyecto 	que manda muchos mensajes a correos electronicos que esten en un archivo de texto, para recolectar 
 estos correos puedes usar una herramienta llamada "theharvester": https://github.com/laramies/theHarvester
+
+By: Diego Jonás Pérez
