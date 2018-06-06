@@ -2,6 +2,20 @@
 from smtplib import SMTP
 from sys import argv
 
+
+def smap(mailist, msg, usr, psw):
+	pass
+def unabomber(mailist, msg, usr, psw, rge):
+	try:
+		server.login(usr, pasw)
+	except Exception as e:
+		print("No se ha podido iniciar seción:\n{}".format(e))
+		exit()
+	else:
+		for mail in mailist:
+			for num in rge:
+				server.sendmail(usr, mail, msg)
+
 def h():	
 	print("Guía de {}:".format(argv[0]))
 	print("\nDe momento solo puedes enviar correos desde una cuenta de gmail.\n")
@@ -49,9 +63,25 @@ if __name__ == '__main__':
 				except:
 					print("{} no es un numero entero".format(argv[count + 1]))
 					exit()
-
 			else:
 				print("No se reconoce la bandera '{}'".format(arg))
 				exit()
 			count += 1
-
+		try:
+			server = SMTP('smtp.gmail.com:587')
+			server.starttls()
+		except Exception as e:
+			print("problemas al iniciar el servidor:\n{}".format(e))
+			exit()
+		msgstr = str()
+		try:
+			file = open(msg, "r")
+		except:
+			print("no se ha podido encontrar el siguiente archivo:\n{}".format(msg))
+			exit()
+		else:
+			for line in file:
+			    #Se que esto puede afectar el rendimiento en archivos grandes, pienso cambiarlo.
+			    msgstr += line
+		if user != "" and passw and "":
+			
