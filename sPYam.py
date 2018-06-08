@@ -3,30 +3,37 @@ from smtplib import SMTP
 from sys import argv
 
 
-def smap(mailist, msg, usr, psw):
-	pass
-def unabomber(mailist, msg, usr, psw, rge):
-	try:
-		server.login(usr, pasw)
-	except Exception as e:
-		print("No se ha podido iniciar seción:\n{}".format(e))
-		exit()
-	else:
-		for mail in mailist:
-			for num in rge:
-				server.sendmail(usr, mail, msg)
+def smap(mailist, msg, usr, psw,):
+	for mail in mailist:
+		try:
+			server.sendmail(usr,mail,msg)
+		except:
+			print("No se ha podido enviar correo a: {}".format(mail))
+		else:
+			print("Correo enviado a: {}".format(mail))
+
+#def unabomber(mailist, msg, usr, psw, rge):
+#	for mail in mailist:
+#		for num in rge:
+#			try:
+#				server.sendmail(usr, mail, msg)
+#			except:
+#				print("No se ha podido enviar correo a: {}".format(mail))
+#			else:
+#				print("Correo enviado a: {}".format(mail))
+
 
 def h():	
 	print("Guía de {}:".format(argv[0]))
 	print("\nDe momento solo puedes enviar correos desde una cuenta de gmail.\n")
-	print("--unabomber:\nSirve para activar el modo mail bomber (Sí, como en los 90's)\n")
+	#print("--unabomber:\nSirve para activar el modo mail bomber (Sí, como en los 90's)\n")
 	print("-u:\nSirve para establecer el usuario que usarás (correo electronico).\n")
 	print("-p:\nEstablecer la contraseña de tu correo.\n")
 	print("-msg:\nEstablecer el archivo donde está el mensaje de tu correo.\n")
 	print("-mail:\nAñadir un correo a la lista de blancos.\n")
 	print("-mfile:\nEstablecer archivo de correos.\n")
-	print("\n\nEsta bandera es solo si está activado el modo unabomber:")
-	print("-r:\nEstablecer la cantidad de veces que se enviará ")
+	#print("\n\nEsta bandera es solo si está activado el modo unabomber:")
+	#print("-r:\nEstablecer la cantidad de veces que se enviará ")
 if __name__ == '__main__':
 	if len(argv) <= 1:
 		print("{} necesita más argumentos para funcionar, usa:\n{} -h para ver las opciones.".format(argv[0],argv[0]))
@@ -57,12 +64,12 @@ if __name__ == '__main__':
 					mails.append(mail)
 			elif arg == "-mail":
 				mails.append(argv[count + 1])
-			elif arg == "-r":
-				try:
-					rnge = int(argv[count + 1])
-				except:
-					print("{} no es un numero entero".format(argv[count + 1]))
-					exit()
+			#elif arg == "-r":
+				#try:
+				#	rnge = int(argv[count + 1])
+				#except:
+				#	print("{} no es un numero entero".format(argv[count + 1]))
+				#	exit()
 			else:
 				print("No se reconoce la bandera '{}'".format(arg))
 				exit()
@@ -73,15 +80,25 @@ if __name__ == '__main__':
 		except Exception as e:
 			print("problemas al iniciar el servidor:\n{}".format(e))
 			exit()
+		try:
+			server.login(user, passw)
+		except Exception as e:
+			print("No se ha podido iniciar seción:\n{}".format(e))
+			exit()
+		
 		msgstr = str()
 		try:
-			file = open(msg, "r")
+			file = open(msgfile, "r")
 		except:
-			print("no se ha podido encontrar el siguiente archivo:\n{}".format(msg))
+			print("no se ha podido abrir el siguiente archivo:\n{}".format(msg))
 			exit()
 		else:
 			for line in file:
+				msgstr += line
 			    #Se que esto puede afectar el rendimiento en archivos grandes, pienso cambiarlo.
-			    msgstr += line
-		if user != "" and passw and "":
+			    
+		#if unabomber == True:
+			#unabomber(mails, msgstr, user, passw, rnge)
+		else:
+			smap(mails, msgstr	, user, passw)
 			
