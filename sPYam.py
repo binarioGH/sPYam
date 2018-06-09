@@ -95,10 +95,10 @@ if __name__ == '__main__':
 		else:
 			for line in file:
 				msgstr += line
+			smap(mails, msgstr, user, passw)
 			    #Se que esto puede afectar el rendimiento en archivos grandes, pienso cambiarlo.
-			    
+		    
 		#if unabomber == True:
 			#unabomber(mails, msgstr, user, passw, rnge)
-		else:
-			smap(mails, msgstr	, user, passw)
+			
 			
