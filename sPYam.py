@@ -15,15 +15,6 @@ def text(msgfile):
 	file.close()
 	return msgstr
 
-def smap(mailist, msg, usr, psw,):
-	for mail in mailist:
-		try:
-			server.sendmail(usr,mail,msg)
-		except Exception as e:
-			print("No se ha podido enviar correo a: {}\n{}".format(mail, e))
-		else:
-			print("Correo enviado a: {}".format(mail))
-
 def unabombermod(mailist, msg, usr, psw, rge):
 	for mail in mailist:
 		for num in range(rnge):
@@ -33,19 +24,16 @@ def unabombermod(mailist, msg, usr, psw, rge):
 				print("No se ha podido enviar correo a: {}\n{}".format(mail,e))
 			else:
 				print("Correo enviado a: {}".format(mail))
-
-
 def h():	
 	print("Guía de {}:".format(argv[0]))
 	print("\nDe momento solo puedes enviar correos desde una cuenta de gmail.\n")
-	print("--unabomber:\nSirve para activar el modo mail bomber (Sí, como en los 90's)\n")
 	print("-u:\nSirve para establecer el usuario que usarás (correo electronico).\n")
 	print("-p:\nEstablecer la contraseña de tu correo.\n")
 	print("-msg:\nEstablecer el archivo donde está el mensaje de tu correo.\n")
 	#print("-mail:\nAñadir un correo a la lista de blancos.\n")
 	print("-mfile:\nEstablecer archivo de correos.\n")
 	print("\n\nEsta bandera es solo si está activado el modo unabomber:")
-	print("-r:\nEstablecer la cantidad de veces que se enviará ")
+	print("-r:\nEstablecer la cantidad de veces que se enviará (si no lo usas se mandará una vez). ")
 if __name__ == '__main__':
 	if len(argv) <= 1:
 		print("{} necesita más argumentos para funcionar, usa:\n{} -h para ver las opciones.".format(argv[0],argv[0]))
@@ -54,7 +42,7 @@ if __name__ == '__main__':
 		count = 0
 		unabomber = False
 		user, passw, msgfile =  str(), str(), str()
-		rnge = str()
+		rnge = 1
 		for arg in argv:
 			if arg[0] != "-":
 				count += 1
@@ -98,10 +86,6 @@ if __name__ == '__main__':
 			print("No se ha podido iniciar seción:\n{}".format(e))
 			exit()
 		msgstr = text(msgfile)
-		if unabomber == True:
-		    unabombermod(mails, msgstr, user, passw, rnge)
-		else:
-			smap(mails, msgstr, user, passw)
-		server.quit()
-			
+		unabombermod(mails, msgstr, user, passw, rnge)
+		
 			
