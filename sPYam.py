@@ -42,7 +42,7 @@ def h():
 	print("-u:\nSirve para establecer el usuario que usarás (correo electronico).\n")
 	print("-p:\nEstablecer la contraseña de tu correo.\n")
 	print("-msg:\nEstablecer el archivo donde está el mensaje de tu correo.\n")
-	print("-mail:\nAñadir un correo a la lista de blancos.\n")
+	#print("-mail:\nAñadir un correo a la lista de blancos.\n")
 	print("-mfile:\nEstablecer archivo de correos.\n")
 	print("\n\nEsta bandera es solo si está activado el modo unabomber:")
 	print("-r:\nEstablecer la cantidad de veces que se enviará ")
@@ -74,8 +74,8 @@ if __name__ == '__main__':
 				mailfile = open(argv[count + 1], "r")
 				for mail in mailfile:
 					mails.append(mail)
-			elif arg == "-mail":
-				mails.append(argv[count + 1])
+			#elif arg == "-mail":
+				#mails.append(argv[count + 1])
 			elif arg == "-r":
 				try:
 					rnge = int(argv[count + 1])
